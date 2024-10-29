@@ -1,22 +1,28 @@
 from pymongo import MongoClient
 from datetime import datetime
 
-#Connect to database (localhost ou instância remota)
-client = MongoClient("localhost", 27017)
-db = client["ProjetoADMRedesBD"] #db name
-collection = db["trafego_rede"]
+def mongoConnect() :
+    #Connect to database (localhost ou instância remota)
+    client = MongoClient("mongodb://localhost:27017")
+    db = client["monitorizing_network"]
+    print("Mongodb is connected")
+    return db
 
-#function to save mongodb packages
+def dbCollectionDevice(db, device):
+    collection = db["device"]
+    device["found_In"] = datetime.now()
+    collection.insert_one(device)
+    print(f"Inserted {device} Successfully")
 
-def save_package_mongo(ip_origem, ip_destino, protocolo, tamanho_pacote) : pacote {
-    'ip_origem': ip_origem,
-    'ip_destino': ip_destino,
-    'protocolo': protocolo,
-    'tamanho_pacote': tamanho_pacote,
-    'timestamp': datetime.now()
-}
-try:
-    collection.insert_one(pacote)
-    print("Pacote salvo no Mongodb")
-except Exception as e:
-    print(f"Erro ao salvar no MongoDB: {e}")
+#teste
+#device = {
+#   "ip": "192.168.1.5",
+#    "mac": "00000",
+#    "host": "villa",
+#    "manufacturer": "asus"
+#}
+
+#connecting db and call device
+#dbCollectionDevice(device)
+
+
