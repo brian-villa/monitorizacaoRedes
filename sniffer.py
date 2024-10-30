@@ -1,45 +1,49 @@
 from scapy.all import sniff, ARP
 from datetime import datetime
 from dbConnect import mongoConnect, dbCollectionDevice
-from getmac import get_mac_address
 import socket
-import nmap
+import requests
 
 
-def get_device_info(mac):
-    #get the manufact by mac andress
-    manufacturer = get_mac_address(mac)
-    return manufacturer
+def get_manufacturer(mac_address):
+    try:
+        response = requests.get(f"https://api.macvendors.com/{mac_address}")
+        if response.status_code == 200:
+            return response.text.strip()
+        return "Unknown Manufacturer"
+    except Exception as e:
+        print(f"Error retrieving manufacturer: {e}")
+        return "Unknown Manufacturer"
+
 
 def get_host_name(ip):
     try:
-        host = socket.gethostbyaddr(ip)[0]
+        return socket.gethostbyaddr(ip)[0]
     except socket.herror:
-        host = "Unknown"
-    return host
+        return "Unknown"
 
-def monitorizing_packets(packet):
-    device_mac = packet[ARP].hwsrc
-    device_ip = packet[ARP].psrc
 
+def monitorizing_packets(packet, db):
     if packet.haslayer(ARP) and packet[ARP].op == 1:
+        device_mac = packet[ARP].hwsrc
+        device_ip = packet[ARP].psrc
+
+        # Create device document
         device = {
-            "ip": packet[ARP].psrc,
-            "mac": packet[ARP].hwsrc,
+            "ip": device_ip,
+            "mac": device_mac,
             "host": get_host_name(device_ip),
-            "manufacturer": get_device_info(device_mac),
+            "manufacturer": get_manufacturer(device_mac),
             "model": "Unknown",
-            "found_in": datetime.now()
+            "found_in": datetime.now(),
+            "status": True
         }
-    print(f"Device found: {device}")
+        print(f"Device found: {device}")
 
-    db=mongoConnect() #conecta ao mongodb
-    dbCollectionDevice(db, device)
+        # Insert or update device in MongoDB
+        dbCollectionDevice(db, device)
 
 
-def start_sniffer():
+def start_sniffer(db):
     print("Starting sniffer...")
-    sniff(prn=monitorizing_packets, filter="arp", store=0)
-
-if __name__ == "__main__":
-    start_sniffer()
+    sniff(prn=lambda packet: monitorizing_packets(packet, db), filter="arp", store=0)
