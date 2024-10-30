@@ -18,4 +18,4 @@ def generate_alert(mac, title, description, severity="medium", db=None):
 
     if db:
         db["alerts"].insert_one(alert)
-        print(f"Alert inserted successfully: {alert}")
+        print(f"Alert inserted successfully: {alert}") ##Ver pq nao cria a tabela no data base
