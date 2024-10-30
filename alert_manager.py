@@ -1,10 +1,13 @@
 from datetime import datetime
 
 def ensure_alerts_collection(db):
-    # Create alerts collection if it doesn't exist
-    if "alerts" not in db.list_collection_names():
-        db.create_collection("alerts")
-        print("Created collection: alerts")
+    try:
+        # Create alerts collection if it doesn't exist
+        if "alerts" not in db.list_collection_names():
+            db.create_collection("alerts")
+            print("Created collection: alerts")
+    except Exception as e:
+        print(f"Error creating 'alerts' collection: {e}")
 
 def generate_alert(mac, title, description, severity="medium", db=None):
     alert = {

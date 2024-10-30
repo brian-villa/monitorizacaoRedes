@@ -6,6 +6,7 @@ from datetime import datetime
 def nmap_scan(network_range="192.168.1.0/24"):
     print(f"Initializing Nmap scan in {network_range}...")
     scanner = nmap.PortScanner()
+    scanner.scan(hosts=network_range, arguments="-sn") #executa o scan
 
     results = []
     for host in scanner.all_hosts():

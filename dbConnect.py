@@ -8,7 +8,7 @@ def mongoConnect():
     return db
 
 def dbCollectionDevice(db, device):
-    collection = db["device"]
+    collection = db["devices"]
     # Check if the device already exists by MAC address
     if collection.find_one({"mac": device["mac"]}):
         print(f"Device already exists: {device['mac']}")
