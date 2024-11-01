@@ -6,6 +6,7 @@ from alert_manager import ensure_alerts_collection, generate_alert
 
 def main():
     db = mongoConnect()
+
     ensure_alerts_collection(db)
 
     discovered_devices = set()  # Conjunto para rastrear MACs já encontrados
@@ -22,10 +23,20 @@ def main():
             mac = device['mac']
             if mac not in discovered_devices:
                 discovered_devices.add(mac)
-                print(f"New device found: {device}")
-                save_scan_results(db, [device])  # Salva o novo dispositivo no banco
-                generate_alert(mac, "Novo Dispositivo Detectado", f"O dispositivo com MAC {mac} foi detectado.", db)
+                print(f"New device found: {device}\n")
+
+                # Salva o novo dispositivo no banco
+                save_scan_results(db, [device])
+                # Gera um alerta para o novo dispositivo
+                generate_alert(
+                    mac,
+                    title="Novo Dispositivo Detectado",
+                    description=f"Um novo dispositivo com o MAC {mac} foi encontrado na rede.",
+                    severity="medium",
+                )
+
                 new_devices += 1
+
             else:
                 print(f"\nDevice already exists: {mac}")
 
