@@ -16,4 +16,4 @@ def dbCollectionDevice(db, device):
     else:
         # Insert the device if it doesn't exist
         collection.insert_one(device)
-        print(f"Inserted {device} Successfully")
+        print(f"Inserted {device} Successfully\n")
