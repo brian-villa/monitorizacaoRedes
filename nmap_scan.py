@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 def nmap_scan(network_range, port):
-    network_range = "192.168.1.0/24"
+    network_range = "172.31.0.0/24"
     port = "-F"  # -F para portas comuns ou "-p-" para todas as portas
 
     print(f"Initializing Nmap scan in {network_range}...")
