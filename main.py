@@ -2,6 +2,7 @@ import time
 from dbConnect import mongoConnect
 from nmap_scan import nmap_scan, save_scan_results
 from alert_manager import ensure_alerts_collection, generate_alert
+from sniffer import start_sniffer
 
 
 def main():
@@ -33,7 +34,7 @@ def main():
                     description=f"Um novo dispositivo com o MAC {mac} foi encontrado na rede.",
                     severity="medium",
                 )
-
+                #start_sniffer(db)
                 new_devices += 1
 
             else:
