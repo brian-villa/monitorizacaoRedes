@@ -72,7 +72,7 @@ h1 {
     background-color: var(--secundary-color); 
     font-weight: 800;
     font-size: 5vh;
-    color: var(--terciary-color); 
+    color: var(--primary-color); 
     border: 5px solid transparent; 
     transition: background-color 0.3s ease-in-out, 
                 color 0.3s ease-in-out, 
@@ -118,7 +118,7 @@ h1 {
 
 .button:hover {
     cursor: pointer;
-    background-color: var(--terciary-color); /* Cor de fundo ao passar o mouse */
+    background-color: var(--primary-color); /* Cor de fundo ao passar o mouse */
     border: 5px solid var(--secundary-color); /* Cor da borda ao passar o mouse */
     color: var(--secundary-color); /* Cor do texto ao passar o mouse */
     transform: scale(1.1); /* Aumenta o tamanho do botão */
