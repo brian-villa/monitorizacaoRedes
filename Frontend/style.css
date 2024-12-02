@@ -1,0 +1,122 @@
+:root {
+    --primary-color: #1B263B;
+    --secundary-color: #BCD0F5;
+    --main-font: 'League Spartan', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--main-font);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--secundary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.divLogo {
+    width: 100vw;
+    height: 25%;
+    background-color: var(--primary-color);
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden; 
+}
+
+.divLogo img {
+    margin-top: 2vh;
+    width: 30%;
+    height: 170%;
+    object-fit: contain; 
+}
+
+h1 {
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    font-size: 2.5vw;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: center;
+}
+.scanContainer{
+    background-color: #E0E1DD;
+    border-radius: 10px;
+    height: 53%;
+    width: 50%;
+    overflow-x: hidden; 
+    overflow-y: scroll;
+}
+.cover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+}
+.cover .button {
+    width: 25%;
+    height: 14%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1vh;
+    border-radius: 10px;
+    background-color: var(--secundary-color); 
+    font-weight: 800;
+    font-size: 5vh;
+    color: var(--terciary-color); 
+    border: 5px solid transparent; 
+    transition: background-color 0.3s ease-in-out, 
+                color 0.3s ease-in-out, 
+                border 0.3s ease-in-out, 
+                transform 0.3s ease-in-out; 
+}
+
+.scanContainer .device {
+    width: 100%;
+    height: 30%;
+    padding: 2vh;
+    list-style: none;
+    border-bottom:1vh solid var(--primary-color) ;
+
+}
+.scanContainer .device h3{
+    margin-bottom: 1vh;
+}
+
+.invisible {
+    display: none;
+}
+
+
+.scanContainer::-webkit-scrollbar {
+    width: 0.5vw; 
+}
+
+.scanContainer::-webkit-scrollbar-track {
+    background-color: var(--primary-color);
+    border-top-right-radius: 10px; 
+    border-bottom-right-radius: 10px; 
+}
+
+.scanContainer::-webkit-scrollbar-thumb {
+    background-color:#E0E1DD; 
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: var(--terciary-color); /* Cor de fundo ao passar o mouse */
+    border: 5px solid var(--secundary-color); /* Cor da borda ao passar o mouse */
+    color: var(--secundary-color); /* Cor do texto ao passar o mouse */
+    transform: scale(1.1); /* Aumenta o tamanho do botão */
+}

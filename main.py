@@ -8,7 +8,6 @@ def main():
     db = mongoConnect()
 
     ensure_alerts_collection(db)
-
     discovered_devices = set()  # Conjunto para rastrear MACs já encontrados
 
     while True:
