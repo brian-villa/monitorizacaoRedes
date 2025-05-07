@@ -2,17 +2,17 @@ from app.db.db_connection import MongoDBConnection
 from app.repositories.alert_repository import AlertRepository
 from app.factories.alert_factory import AlertFactory
 from datetime import datetime
+
 class AlertService:
     def __init__(self):
         db = MongoDBConnection().get_db()
         self.repository = AlertRepository(db)
 
     def generate_alert(self, mac, title, description, severity="medium"):
-        alert = AlertFactory.create()
-        print(f"Alert generated: {alert}")
-
         try:
-            self.collection.insert_one(alert)
+            alert = AlertFactory.create(mac, title, description, severity)
+            alert_data = alert.alert_schema()
+            self.repository.insert_one(alert_data)
             print(f"\nAlert inserted successfully: {alert}\n")
         except Exception as e:
             print(f"\nError inserting alert: {e}\n")
