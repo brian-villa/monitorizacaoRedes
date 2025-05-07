@@ -8,13 +8,7 @@ class AlertService:
         self.repository = AlertRepository(db)
 
     def generate_alert(self, mac, title, description, severity="medium"):
-        alert = {
-            "mac": mac,
-            "title": title,
-            "description": description,
-            "severity": severity,
-            "alert_generated_at": datetime.now()
-        }
+        alert = AlertFactory.create()
         print(f"Alert generated: {alert}")
 
         try:

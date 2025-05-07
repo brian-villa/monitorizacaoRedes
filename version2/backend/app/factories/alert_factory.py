@@ -4,9 +4,11 @@ from app.models.alert_model import AlertModel
 class AlertFactory:
     @staticmethod
     def create(mac, title, description, severity="medium") -> AlertModel:
-        mac = mac,
-        title = title,
-        description = description,
-        severity = severity,
-        alert_generated_at = datetime.now()
+        return AlertModel(
+            mac = mac,
+            title = title,
+            description = description,
+            severity = severity,
+            alert_generated_at = datetime.now()
+        )
         
