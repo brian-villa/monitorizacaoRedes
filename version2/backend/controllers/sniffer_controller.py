@@ -3,7 +3,7 @@ from services.sniffer_service import SnifferService
 from dotenv import load_dotenv
 
 from pathlib import Path
-dotenv_path = Path(__file__).resolve().parents[3] / ".env.local"
+dotenv_path = Path(__file__).resolve().parents[2] / "env" / ".env.local"
 load_dotenv(dotenv_path)
 
 class SnifferController:
