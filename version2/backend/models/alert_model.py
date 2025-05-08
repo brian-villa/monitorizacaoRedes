@@ -1,7 +1,7 @@
 from datetime import datetime
 
 class AlertModel:
-    def __init__(self, mac, title, description, severity=None, alert_generated_at=None):
+    def __init__(self, mac, title, description, severity="medium", alert_generated_at=None):
         self.mac = mac
         self.title = title
         self.description = description
@@ -16,7 +16,6 @@ class AlertModel:
             "severity": self.severity,
             "alert_generated_at": self.alert_generated_at
         }
+    
     def __str__(self):
         return f"Alert: mac: {self.mac}, title: {self.title}, description: {self.description}, severity: {self.severity}, alert_generated_at: {self.alert_generated_at}"
-    
-        

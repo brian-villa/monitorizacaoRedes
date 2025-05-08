@@ -12,7 +12,7 @@ class AlertService:
         try:
             alert = AlertFactory.create(mac, title, description, severity)
             alert_data = alert.alert_schema()
-            self.repository.insert_one(alert_data)
+            self.repository.insert(alert_data)
             print(f"\nAlert inserted successfully: {alert}\n")
         except Exception as e:
             print(f"\nError inserting alert: {e}\n")

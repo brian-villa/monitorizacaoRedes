@@ -3,7 +3,6 @@ import os
 import threading
 import time
 
-# Obtenha o caminho absoluto para o diretório raiz do projeto (backend)
 BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 sys.path.append(BASE_DIR)
 
