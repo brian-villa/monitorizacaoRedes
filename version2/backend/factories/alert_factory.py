@@ -1,5 +1,5 @@
 from datetime import datetime
-from app.models.alert_model import AlertModel
+from models.alert_model import AlertModel
 
 class AlertFactory:
     @staticmethod

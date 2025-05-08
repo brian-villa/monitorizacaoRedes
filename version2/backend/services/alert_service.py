@@ -1,6 +1,6 @@
-from app.db.db_connection import MongoDBConnection
-from app.repositories.alert_repository import AlertRepository
-from app.factories.alert_factory import AlertFactory
+from db.db_connection import MongoDBConnection
+from repositories.alert_repository import AlertRepository
+from factories.alert_factory import AlertFactory
 from datetime import datetime
 
 class AlertService:

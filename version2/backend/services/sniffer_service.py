@@ -1,19 +1,15 @@
 from scapy.all import sniff, ARP
 from datetime import datetime
-from app.db.db_connection import MongoDBConnection
-from app.repositories.device_repository import DeviceRepository
+from db.db_connection import MongoDBConnection
+from repositories.device_repository import DeviceRepository
 import socket
 import requests
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
 
 class SnifferService:
-    def __init__(self):
-        db = MongoDBConnection().get_db()
-        self.repository = DeviceRepository(db)
-        self.api_key = os.getenv("api_key_mac_vendors")
+    def __init__(self, device_service, api_key):
+        self.device_service = device_service
+        self.api_key = api_key
 
     def start_sniffer(self):
         print("Starting sniffer...")
@@ -24,17 +20,15 @@ class SnifferService:
             mac = packet[ARP].hwsrc
             ip = packet[ARP].psrc
 
-            device = {
+            device_data = {
                 "ip": ip,
                 "mac": mac.upper(),
                 "host": self.resolve_host(ip),
                 "manufacturer": self.get_manufacturer(mac),
-                "found_in": "sniffer",
-                "created_at": datetime.now()
+                "found_in": "sniffer"
             }
-
-            print(f"[Sniffer] Device found: {device}")
-            self.repository.insert_if_not_exists(device)
+            
+            self.device_service.process_scanned_device(device_data, "sniffer")
 
     def get_manufacturer(self, mac_address):
         try:

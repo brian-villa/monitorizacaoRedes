@@ -1,4 +1,4 @@
-from app.services.alert_service import AlertService
+from services.alert_service import AlertService
 
 class AlertController:
     def __init__(self):

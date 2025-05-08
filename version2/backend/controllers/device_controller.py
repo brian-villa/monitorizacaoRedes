@@ -1,8 +1,6 @@
-from app.services.device_service import DeviceService
-
 class DeviceController:
-    def __init__(self):
-        self.device_service = DeviceService()
+    def __init__(self, device_service):
+        self.device_service = device_service
 
     def add_new_device(self, scan_data, source):
         try:
