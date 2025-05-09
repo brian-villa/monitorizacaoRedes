@@ -4,6 +4,7 @@ from db.db_connection import MongoDBConnection
 from repositories.device_repository import DeviceRepository
 from services.device_service import DeviceService
 from controllers.device_controller import DeviceController
+from controllers.alert_controller import AlertController
 
 class FlaskAPI:
     def __init__(self, device_service):
@@ -39,16 +40,18 @@ class FlaskAPI:
 
     def setup_controllers(self):
         try:
-            self.device_controller = DeviceController(self.device_service)  # Inject the service
+            self.device_controller = DeviceController(self.device_service)
+            self.alert_controller = AlertController()
         except Exception as e:
             print(f"Error configuring controllers: {e}")
             self.device_controller = None
+            self.alert_controller = None
 
     def register_routes(self):
         #check API status
         @self.app.route("/api/status", methods=["GET"])
         def get_status():
-            db_status = "connected" if self.db_connection and self.db_connection.get_db() else "disconnected"
+            db_status = "connected" if self.db_connection and self.db_connection.get_db() is not None else "disconnected"
             return jsonify({
                 "status": "online",
                 "database": db_status
@@ -60,6 +63,28 @@ class FlaskAPI:
             if not self.device_controller:
                 return jsonify({"error": "Device controller not available"}), 503
             return self.device_controller.list_all_devices()
+        
+        @self.app.route("/api/devices/<mac>", methods=["GET"])
+        def get_devices_by_mac(mac): 
+            if not self.device_controller:
+                return jsonify({"error": "Device controller not available"}), 503
+            return self.device_controller.get_device_by_mac(mac)
+        
+        @self.app.route("/api/alerts", methods=["GET"])
+        def get_all_alerts():
+            if not self.alert_controller:
+                return jsonify({"error": "Alert controller not available"}), 503
+            alerts = self.alert_controller.list_all_alerts()
+            return alerts
+
+        # get alerts by mac
+        @self.app.route("/api/alerts/<mac>", methods=["GET"])
+        def get_alerts_by_mac(mac):
+            if not self.alert_controller:
+                return jsonify({"error": "Alert controller not available"}), 503
+            alerts = self.alert_controller.list_alerts_by_mac(mac)
+            return alerts
+
 
     def register_error_handlers(self):
         @self.app.errorhandler(500)
