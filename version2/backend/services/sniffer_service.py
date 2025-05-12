@@ -59,7 +59,7 @@ class SnifferService:
                 mac=mac,
                 title="New Device Detected",
                 description=f"New device with IP {ip} and MAC {mac} detected.",
-                severity="medium"
+                severity="low"
             )
 
         if mac in suspicious_macs:
@@ -77,7 +77,7 @@ class SnifferService:
                     mac=mac,
                     title="Unknown Manufacturer",
                     description=f"Device with MAC {mac} has an unknown manufacturer.",
-                    severity="low"
+                    severity="medium"
                 )
                 self.device_service.device_repository.update_field(mac, "unknown_manufacturer_alerted", True)
 
