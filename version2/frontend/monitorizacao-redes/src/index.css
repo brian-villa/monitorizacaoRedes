@@ -9,6 +9,21 @@
   }
 }
 
+.hovered {
+  transform: scale(1.05);
+  background-color: #18293f;
+  transition: all 0.3s ease;
+}
+.hoveredArrow{
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease;
+}
+body
+ {
+  overflow-y: hidden;
+}
+
 .animate-slow-ping {
   animation: slowPing 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
