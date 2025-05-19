@@ -1,3 +1,5 @@
+[Versão em Português](#nethound-monitoramento-de-rede)
+
 # NETHOUND Network Monitoring
 
 Nethound is a network monitoring tool that scans devices on your network and alerts you about unauthorized connections and network activity.
