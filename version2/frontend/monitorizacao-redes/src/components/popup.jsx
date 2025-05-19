@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 function Popup() {
   const [isVisible, setIsVisible] = useState(true);
   const [isClosing, setIsClosing] = useState(false);
@@ -22,7 +23,7 @@ function Popup() {
           isClosing ? "opacity-0 scale-90" : "opacity-100 scale-100"
         }`}
       >
-        <h1 className="font-bold text-2xl text-[#6da34d] mb-2">How we work?</h1>
+        <h1 className="font-bold text-2xl text-[#6da34d] mb-2">Privacy police</h1>
         <p className="font-light text-base mb-4">
           We use a Python-based script to scan all devices connected to your network,
           making it easier to identify any unauthorized presence. All collected data is used
