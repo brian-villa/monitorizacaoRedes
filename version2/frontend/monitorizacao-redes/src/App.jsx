@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Header from './components/header';
 import Popup from './components/popup';
 import StartBut from './components/startBut';
@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div
-        className="w-full min-h-screen text-white justify-items-center font-['Roboto'] bg-[#101d2d] overflow-y-hidden"
+        className="min-w-screen min-h-screen text-white flex flex-col justify-center items-center font-['Roboto'] bg-[#101d2d] overflow-y-hidden"
       >
         <Popup />
 

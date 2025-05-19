@@ -6,9 +6,10 @@ const Alerts = () => {
     const [error, setError] = useState(null);
 
     const apiKey = import.meta.env.VITE_API_KEY;
+    const url = import.meta.env.VITE_api_url
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/alerts', {
+        axios.get(`${url}/api/alerts`, {
             headers: {
                 'X-API-Key': apiKey,
             }

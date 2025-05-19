@@ -15,9 +15,10 @@ const Devices = () => {
     const [error, setError] = useState(null);
 
     const apiKey = import.meta.env.VITE_API_KEY;
+     const url = import.meta.env.VITE_api_url
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/devices', {
+        axios.get(`${url}/api/devices`, {
         headers: {
             'X-API-Key': apiKey,
         }
