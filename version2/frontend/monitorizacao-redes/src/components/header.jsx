@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Nethound from "../assets/Nethound.png"
-import NethoundHover from "../assets/NethoundHover.png"
+import Nethound from "../assets/NETHOUND.png"
+import NethoundHover from "../assets/NETHOUNDHOVER.png"
 
 
 
